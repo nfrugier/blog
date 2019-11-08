@@ -27,7 +27,7 @@ if(isset($_POST['login'])){
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if($user === false){
-        die('Combinaison Login/Pass incorrecte <br/><a href="/" class="btn btn-primary">Retour</a>');
+        die($GLOBALS['error_log']);
     } else {
         $_SESSION['login'] = $user["login"];
         $_SESSION['id'] = $user["id_user"];
@@ -44,8 +44,8 @@ if(isset($_POST['login'])){
         <link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root'];?>assets/css/bootstrap.min.css" />
     </head>
 
-    <body>
-        <h1 class="text-center">Blog</h1>
+    <body class="bg-secondary">
+    <?php include("../../navbar.php") ?>
         <div class="container">
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -53,11 +53,11 @@ if(isset($_POST['login'])){
                         <div class="card-body">
                             <h5 class="card-title text-center">Connexion</h5>
                             <form class="form-signin" method="post">
-                                <div class="form-label-group">
+                                <div class="form-label-group mb-2">
                                 <input type="text" id="username" name="username" class="form-control" placeholder="Login" required autofocus>
                                 </div>
 
-                                <div class="form-label-group">
+                                <div class="form-label-group mb-2">
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                                 </div>
 

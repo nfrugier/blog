@@ -1,5 +1,4 @@
 <?php 
-error_reporting(E_ALL);
 require("bdd.php");
 include("conf.global.php");
 
@@ -45,8 +44,8 @@ if(isset($_POST['signin'])){
         <link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root'];?>assets/css/bootstrap.min.css" />
     </head>
 
-    <body>
-        <!-- <h1 class="text-center">Blog</h1> -->
+    <body class="bg-secondary">
+    <?php include("../../navbar.php") ?>
         <div class="container">
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">

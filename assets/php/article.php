@@ -15,14 +15,14 @@ $articles = $dbh->query($sql);
 foreach ($articles as $article): ?>
 
 <div class="container">
-    <div class="card text-center">
+    <div class="card text-center shadow-sm">
         <div class="card-header">
             Auteur : <?php echo "<a href='/index.php?id_user=".$article['id_user']."'>".$article['login']."</a>"; ?>
         </div>
         <div class="card-body">
             <div class="card-title">
                 <?php echo "<h3>".$article['subject']."</h3>"; ?>
-                <?php echo "<h5> Catégorie : <a href='/index.php?id_cat=".$article['id_cat']."'>".utf8_encode($article['name'])."</a>"."</h5>" ?>
+                
             </div>
             <p class="card-text">
                 <?php echo $article['message']; ?>
@@ -30,6 +30,7 @@ foreach ($articles as $article): ?>
         </div>
         <div class="card-footer text-muted">
             <?php echo $article['date_publication']; ?>
+            <?php echo "<br><span class='small'> Catégorie : <a href='/index.php?id_cat=".$article['id_cat']."'>".utf8_encode($article['name'])."</a>"."</span>" ?>
         </div>
     </div>
 </div>

@@ -3,6 +3,10 @@ require("bdd.php");
 include("conf.global.php");
 session_start();
 
+if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
+    header("Location:login.php");
+}
+
 if(isset($_POST['post'])){
 
 
@@ -20,7 +24,8 @@ if(isset($_POST['post'])){
 
         $stmt->execute();
 
-        $stmt->debugDumpParams();
+        // $stmt->debugDumpParams();
+        header("Location:../../index.php");
     }
     catch(PDOException $e) {
         print "Erreur ! : " .$e->getMessage(). "<br>";
@@ -33,12 +38,13 @@ if(isset($_POST['post'])){
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root'];?>assets/css/bootstrap.min.css" />
+        <script src="../js/autoarea.js"></script>
     </head>
-    <body>
-        <h1 class="text-center">Blog</h1>
+    <body  class="bg-secondary">
+    <?php include("../../navbar.php") ?>
         <div class="container">
             <div class="row">
-                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
                     <div class="card card-signin my-5">
                         <div class="card-body">
                             <h5 class="card-title text-center">Ajout d'un article</h5>
@@ -52,8 +58,8 @@ if(isset($_POST['post'])){
                                 </div>
 
                                 <div class="form-label-group">
-                                    <label>Catégorie</label>
-                                <select name="cat">
+                                    
+                                <select name="cat" class="form-control" id="cat">
                                     <?php
                                         $query = "SELECT * FROM category ORDER BY name ASC";
                                         $categories = $dbh->query($query);
@@ -61,6 +67,7 @@ if(isset($_POST['post'])){
                                         <option value="<?php echo $category['id_cat']?>"><?php echo utf8_encode($category['name']) ?></option>
                                         <?php endforeach ?>
                                 </select>
+                                <label for="cat" class="small">Catégories</label>
                                 </div>
 
                                 <div class="form-label-group">
@@ -74,6 +81,5 @@ if(isset($_POST['post'])){
                 </div>
             </div>
         </div>
-        <?php include("../../back.php");?>
     </body>
 </html>
