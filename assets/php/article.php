@@ -25,7 +25,7 @@ foreach ($articles as $article): ?>
                 
             </div>
             <p class="card-text">
-                <?php echo $article['message']; ?>
+                <?php echo "<pre>".$article['message']."</pre>"; ?>
             </p>
         </div>
         <div class="card-footer text-muted">
