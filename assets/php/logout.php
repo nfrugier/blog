@@ -21,7 +21,7 @@ session_destroy();
                     <div class='card my-5'>
                         <div class='card-body'>
                             <h5 class="card-title text-center">Vous avez été déconnecté</h5>
-                            <a href="/" class="btn btn-lg btn-primary btn-block text-uppercase">Retour</a>
+                            <a href="/" class="btn btn-lg btn-primary btn-block text-uppercase">Home</a>
                         </div>
                     </div>
                 </div>

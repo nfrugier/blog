@@ -9,23 +9,29 @@ if(isset($_POST['login'])){
     $username = !empty($_POST['username']) ? trim($_POST['username']) : null;
     $passwordAttempt = !empty($_POST['password']) ? trim($_POST['password']) : null;
     
-    $sql = "SELECT id_user, login, passwd FROM users WHERE login = :username";
-    $stmt = $dbh->prepare($sql);
+    $sql = "SELECT id_user, login FROM users WHERE login = :username AND passwd = :passwd";
+
+    try {
+        $stmt = $dbh->prepare($sql);
     
-    $stmt->bindValue(':username', $username);
-    
-    $stmt->execute();
+        $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':passwd', $passwordAttempt);
+        
+        $stmt->execute();
+    }
+    catch(PDOException $e) {
+        print "Erreur ! : " .$e->getMessage(). "<br>";
+        die();
+    }
     
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if($user === false){
-        die('Combinaison Login/Pass incorrecte <br/><a href="/"><button>Retour</button></a>');
+        die('Combinaison Login/Pass incorrecte <br/><a href="/" class="btn btn-primary">Retour</a>');
     } else {
-        /**no security yet */
-        $_SESSION['login'] = $username;
-        header('Location: ../../index.php');
-        exit;
-        
+        $_SESSION['login'] = $user["login"];
+        $_SESSION['id'] = $user["id_user"];
+        header('Location: ../../index.php');        
     }
 }
 
@@ -49,15 +55,14 @@ if(isset($_POST['login'])){
                             <form class="form-signin" method="post">
                                 <div class="form-label-group">
                                 <input type="text" id="username" name="username" class="form-control" placeholder="Login" required autofocus>
-                                <label for="inputEmail">Login</label>
                                 </div>
 
                                 <div class="form-label-group">
-                                <input type="text" id="password" class="form-control" placeholder="Password" required>
-                                <label for="inputPassword">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                                 </div>
 
                                 <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit" name="login">Connexion</button>
+                                <a href="signin.php" class="btn btn-lg btn-primary btn-block text-uppercase" >Inscription</a>
                             </form>
                         </div>
                     </div>
