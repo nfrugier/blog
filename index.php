@@ -4,12 +4,6 @@ require("assets/php/bdd.php");
 
 include("assets/php/conf.global.php");
 
-session_start();
-if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
-    header("Location:assets/php/login.php");
-} else{
-}
-
 //echo "<pre>"; print_r($_SESSION); echo "</pre>";
 ?>
 

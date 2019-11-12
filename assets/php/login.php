@@ -9,7 +9,7 @@ if(isset($_POST['login'])){
     $username = !empty($_POST['username']) ? trim($_POST['username']) : null;
     $passwordAttempt = !empty($_POST['password']) ? trim($_POST['password']) : null;
     
-    $sql = "SELECT id_user, login FROM users WHERE login = :username AND passwd = :passwd";
+    $sql = "SELECT id_user, login FROM users WHERE login = :username AND passwd = MD5(:passwd)";
 
     try {
         $stmt = $dbh->prepare($sql);

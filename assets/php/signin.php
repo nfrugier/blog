@@ -15,7 +15,7 @@ if(isset($_POST['signin'])){
         die('les deux mots de passe sont différents <br/><a href="/" class="btn btn-primary">Retour</a>');
     }
 
-    $sql = "INSERT INTO users SET email=:email, login=:login, passwd=:passwd";
+    $sql = "INSERT INTO users SET email=:email, login=:login, passwd= MD5(:passwd)";
     
 
     try {
