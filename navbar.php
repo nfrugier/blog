@@ -14,8 +14,12 @@ $name = (isset($_SESSION['login'])) ? "Bonjour ".$_SESSION['login'] : "Veuillez 
                 <h2 class="card-title text-center align-middle"><?php echo $name;?>&nbsp;&nbsp;</h2>
             </div>
             <div clas="col-sm-7 col-md-7 col-lg-7">
-                <a href="<?php echo $GLOBALS['root'];?>assets/php/login.php" class="btn btn-success text-uppercase">Login</a>
-                <a href="<?php echo $GLOBALS['root'];?>assets/php/add_art.php" class="btn btn-success text-uppercase">Add</a>
-                <a href="<?php echo $GLOBALS['root'];?>assets/php/logout.php" class="btn btn-danger text-uppercase">x</a>
+                
+                <?php if(isset($_SESSION['login'])) :?>
+                    <a href="<?php echo $GLOBALS['root'];?>assets/php/add_art.php" class="btn btn-success text-uppercase">Add</a>
+                    <a href="<?php echo $GLOBALS['root'];?>assets/php/logout.php" class="btn btn-danger text-uppercase">x</a>
+                <?php else :?>
+                    <a href="<?php echo $GLOBALS['root'];?>assets/php/login.php" class="btn btn-success text-uppercase">Login</a>
+                <?php endif?>
             </div>
 </nav>

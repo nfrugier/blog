@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require("assets/php/bdd.php");
 
@@ -13,7 +14,9 @@ include("assets/php/conf.global.php");
     <meta charset="UTF-8">
     </head>
     <body class="bg-secondary">
+
         <?php include("navbar.php") ?>
+        
         <div class=container>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
